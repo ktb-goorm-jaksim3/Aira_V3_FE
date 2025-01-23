@@ -3,6 +3,38 @@ import axios from "axios";
 
 // 환경 변수에서 API URL 가져오기
 const API_BASE_URL = process.env.VUE_APP_API_BASE_URL;
+/**
+ * 로그인 API 호출 함수
+ */
+export const handleLogin = async (email, password) => {
+  try {
+    console.log("Sending login request with:", { email, password });
+
+    const response = await axios.post(`${API_BASE_URL}/auth/login`, {
+      email: email,
+      password: password,
+    },{
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log("Login response:", response.data);
+
+    return {
+      success: true,
+      data: response.data, // access_token 포함
+    };
+  } catch (error) {
+    console.error("Login error:", error.response ? error.response.data : error);
+    return {
+      success: false,
+      message: error.response && error.response.data
+        ? error.response.data
+        : "서버 오류",
+    }; 
+  }
+};
 
 /**
  * 회원가입 API 호출 함수
@@ -34,28 +66,3 @@ export const handleSignup = async (nickname, email, password) => {
     };
   }
 };
-
-
-/**
- * 로그인 API 호출 함수
- */
-export const handleLogin = async (email, password) => {
-    try {
-      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
-        username: email,
-        password: password,
-      });
-  
-      return {
-        success: true,
-        data: response.data, // access_token 포함
-      };
-    } catch (error) {
-      return {
-        success: false,
-        message: error.response && error.response.data
-          ? error.response.data
-          : "서버 오류",
-      };
-    }
-  };
