@@ -131,19 +131,27 @@ export default {
 
 <style scoped>
 .button-login {
-  height: 5vh;
-  background-color: #e8e8e8; /* 기본 배경색 */
+  height: auto; /* 고정 높이를 제거 */
+  padding: 0; /* 버튼 내부 위아래 여백 제거 */
+  margin: 0; /* 버튼 외부 여백 제거 */
+  background-color: #e8e8e8; /* 버튼 배경색 */
+  text-align: left; /* 버튼 텍스트를 왼쪽 정렬 */
+  position: fixed; /* 화면 상단에 고정 */
+  top: 0; /* 페이지의 가장 위로 배치 */
+  left: 0; /* 왼쪽에 정렬 */
+  width: auto; /* 너비를 콘텐츠 크기에 맞춤 */
+  padding: 10px 20px; /* 버튼 내부 좌우 여백 설정 */
+  z-index: 1000; /* 다른 요소 위에 위치 */
 }
-/* 페이지 배경색 설정 */
+
 .signup-page {
-  background-color: #e8e8e8; /* 기본 배경색 */
-  height: 90vh; /* 화면 전체 높이 */
+  background-color: #e8e8e8;
+  min-height: calc(100vh - 5vh); /* 버튼 높이만큼 제외 */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px; /* 여백 설정 */
+  padding: 20px;
 }
-
 /* 회원가입 컨테이너 스타일 */
 .signup-container {
   max-width: 400px; /* 폼 최대 너비 설정 */
@@ -151,7 +159,7 @@ export default {
   padding: 20px; /* 내부 여백 설정 */
   border-radius: 0px; /* 둥근 테두리 */
   box-shadow: none; /* 부드러운 그림자 */
-  margin-top: -50px; /* 컨테이너를 위로 이동 */
+  
 }
 
 /* 입력 그룹 스타일 */

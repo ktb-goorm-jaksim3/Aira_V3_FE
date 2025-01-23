@@ -87,17 +87,27 @@ export default {
 <style scoped>
 /* 페이지 배경색 설정 */
 .button-signup {
-  height: 5vh;
-  background-color: #e8e8e8; /* 기본 배경색 */
+  height: auto; /* 고정 높이를 제거 */
+  padding: 0; /* 버튼 내부 위아래 여백 제거 */
+  margin: 0; /* 버튼 외부 여백 제거 */
+  background-color: #e8e8e8; /* 버튼 배경색 */
+  text-align: left; /* 버튼 텍스트를 왼쪽 정렬 */
+  position: fixed; /* 화면 상단에 고정 */
+  top: 0; /* 페이지의 가장 위로 배치 */
+  left: 0; /* 왼쪽에 정렬 */
+  width: auto; /* 너비를 콘텐츠 크기에 맞춤 */
+  padding: 10px 20px; /* 버튼 내부 좌우 여백 설정 */
+  z-index: 1000; /* 다른 요소 위에 위치 */
 }
 
+
 .login-page {
-  background-color: #e8e8e8; /* 기본 배경색 */
-  height: 90vh; /* 화면 전체 높이 */
+  background-color: #e8e8e8;
+  min-height: calc(100vh - 5vh); /* 버튼 높이만큼 제외 */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px; /* 여백 설정 */
+  padding: 20px;
 }
 
 /* 로그인 컨테이너 스타일 */
@@ -197,11 +207,12 @@ button {
   background: #525252; /* 버튼 배경색 */
   color: #fff; /* 버튼 텍스트 색상 */
   border: none; /* 테두리 제거 */
-  border-radius: 0px; /* 직각 모서리 */
+  border-radius: 0px; /* 모서리를 직각으로 설정 */
   font-size: 1rem; /* 글자 크기 */
-  font-weight: normal; /* 기본 글자 두께 */
+  font-weight: bold; /* 굵은 글씨 */
   cursor: pointer; /* 클릭 가능한 커서 */
   transition: background-color 0.3s; /* 배경색 전환 효과 */
+  align-items: center;
 }
 
 .login-btn:disabled {

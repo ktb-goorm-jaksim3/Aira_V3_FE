@@ -17,7 +17,7 @@
 export default {
   methods: {
     goToNext() {
-      this.$router.push('/question1'); // Question1으로 이동
+      this.$router.push('/question'); // Question1으로 이동
     },
   },
 };
