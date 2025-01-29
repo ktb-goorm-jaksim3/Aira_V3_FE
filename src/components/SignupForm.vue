@@ -114,7 +114,7 @@ export default {
           this.confirmPassword = "";
 
           // 회원가입 성공 시 AiraIntro로 이동
-          this.$router.push('/intro');
+          this.$router.push('/login');
         } else {
           alert("회원가입 실패: " + result.message);
         }
