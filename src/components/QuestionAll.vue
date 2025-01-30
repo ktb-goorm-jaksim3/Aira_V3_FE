@@ -219,7 +219,8 @@ export default {
   display: block;
   margin: 1rem auto; /* 이미지 위아래 여백 추가 */
   width: 250px;
-  margin-bottom: 0rem;
+  margin-top: 0.7rem;
+  margin-bottom: 2rem;
 }
 .options {
   display: flex; /* Flexbox 활성화 */
