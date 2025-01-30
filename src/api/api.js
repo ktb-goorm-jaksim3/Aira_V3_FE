@@ -91,3 +91,19 @@ export const submitQuestionAnswers = async (answers) => {
     };
   }
 };
+
+// 사용자 정보 가져오기
+export const getUserInfo = async () => {
+  const token = localStorage.getItem('token'); // 저장된 토큰 가져오기
+  try {
+    const response = await axios.get(`${API_BASE_URL}/auth/me`, {
+      headers: {
+        'Authorization': `Bearer ${token}` // 인증 헤더에 토큰 추가
+      }
+    });
+    return response.data; // 사용자 정보 반환
+  } catch (error) {
+    console.error("Error fetching user info:", error);
+    return null; // 오류 발생 시 null 반환
+  }
+};

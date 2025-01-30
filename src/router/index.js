@@ -7,7 +7,7 @@ import Summary from '../components/SummaryPage.vue';
 import ChatPage from '../components/ChatPage.vue';
 
 const routes = [
-  { path: '/', redirect: '/signup' }, // 기본 경로를 로그인 페이지로 설정
+  { path: '/', redirect: '/login' }, // 기본 경로를 로그인 페이지로 설정
   { path: '/signup', component: SignupForm },
   { path: '/login', component: LoginForm },
   { path: '/intro', component: AiraIntro },
