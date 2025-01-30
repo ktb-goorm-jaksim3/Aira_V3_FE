@@ -1,29 +1,22 @@
 <template>
-    <div class="questions">
-      <!-- 질문 네비게이션 -->
-      <div class="tabs">
-        <div
-          v-for="(tab, index) in tabs"
-          :key="index"
-          class="tab-container"
-        >
-          <button
-            :class="{ active: activeTab === index }"
-            @click="activeTab = index"
-          >
-            {{ tab }}
-          </button>
-          <!-- 체크박스: 질문이 완료된 경우 체크 -->
-          <div class="completion-checkbox">
-            <label>
-              <input type="checkbox" :checked="!!answers[index]" disabled />
-            </label>
-          </div>
+  <div class="questions">
+    <!-- 질문 네비게이션 -->
+    <div class="tabs">
+      <div v-for="(tab, index) in tabs" :key="index" class="tab-container">
+        <button :class="{ active: activeTab === index }" @click="activeTab = index">
+          {{ tab }}
+        </button>
+        <!-- 체크박스: 질문이 완료된 경우 체크 -->
+        <div class="completion-checkbox">
+          <label>
+            <input type="checkbox" :checked="!!answers[`answer${index + 1}`]" disabled />
+          </label>
         </div>
       </div>
-  
-      <!-- 질문 내용 -->
-      <div v-if="filteredQuestions.length > 0" class="question-container">
+    </div>
+
+    <!-- 질문 내용 -->
+    <div v-if="filteredQuestions.length > 0" class="question-container">
       <div v-for="(question, index) in filteredQuestions" :key="index">
         <div class="question-content">
           <h2 class="question-title">{{ question.title }}</h2>
@@ -35,8 +28,8 @@
             <input
               type="radio"
               :name="'question' + activeTab"
-              :value="option.value"
-              v-model="answers[activeTab]"
+              :value="optIndex + 1"
+              v-model="answers[`answer${activeTab + 1}`]"
               @change="markCompletion(activeTab)"
             />
             <span v-html="option.label"></span>
@@ -44,25 +37,28 @@
         </div>
       </div>
     </div>
-    <button :disabled="answers.includes('')" @click="submitAnswers">제출하기</button>
+    <button :disabled="Object.values(answers).includes('')" @click="submitAnswers">제출하기</button>
   </div>
 </template>
 
 <script>
+import { submitQuestionAnswers } from "../api/api.js"; // 추가된 API 호출
+
 export default {
   data() {
     return {
       activeTab: 0, // 활성화된 탭
       tabs: ["Q1", "Q2", "Q3", "Q4", "Q5"], // 탭 이름
-      answers: ["", "", "", "", ""], // 각 질문의 답변 저장
+      answers: { answer1: "", answer2: "", answer3: "", answer4: "", answer5: "" }, // 각 질문의 답변 저장
       questions: [
+        // 질문 데이터
         {
           title: "Q1. 개방성",
           body: "새로운 아이디어를 생각할 때<br>당신은 얼마나 독창적인<br>접근 방식을 선호하시나요?",
           image: "https://raw.githubusercontent.com/tkddk0108/image-for-Aira/main/Question1.png",
           options: [
-            { value: "1", label: "검증된 방법이<br />효과적인 것 같아요." },
-            { value: "2", label: "창의적인 방법<br />찾는 걸 좋아해요." },
+            { label: "검증된 방법이<br />효과적인 것 같아요." },
+            { label: "창의적인 방법<br />찾는 걸 좋아해요." },
           ],
         },
         {
@@ -115,19 +111,28 @@ export default {
   },
   methods: {
     markCompletion(index) {
-      // 특정 질문에 답변이 선택되면 완료 상태로 처리
-      if (this.answers[index]) {
+      if (this.answers[`answer${index + 1}`]) {
         console.log(`Question ${index + 1} completed`);
       }
     },
-    submitAnswers() {
-      console.log("답변:", this.answers);
-      alert("답변이 제출되었습니다!");
-      this.$router.push('/summary'); 
+    async submitAnswers() {
+      try {
+        const response = await submitQuestionAnswers(this.answers);
+        if (response.success) {
+          alert("답변이 제출되었습니다!");
+          this.$router.push("/summary");
+        } else {
+          alert(response.message);
+        }
+      } catch (error) {
+        console.error(error);
+        alert("제출 중 오류가 발생했습니다.");
+      }
     },
   },
 };
 </script>
+
 
 <style scope>
 /* 질문 전체 컨테이너 */
@@ -152,13 +157,15 @@ export default {
 .tabs button {
   padding: 0.5rem 1rem;
   border: none;
-  background: #f0f0f0;
+  background: #ccc;
   cursor: pointer;
+  border-radius: 0px;
 }
 .tabs button.active {
   font-weight: bold;
   color: white;
   background: #525252;
+  border-radius: 0px;
 }
 
 /* 완료 체크박스 스타일 */
@@ -235,7 +242,7 @@ button {
   color: white;
   font-size: 1rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0px;
   cursor: pointer;
   margin: 2rem auto 0; /* 가로 방향 가운데 정렬 및 위쪽 여백 추가 */
   display: block; /* 블록 요소로 설정 */

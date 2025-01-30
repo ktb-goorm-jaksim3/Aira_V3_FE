@@ -66,3 +66,28 @@ export const handleSignup = async (nickname, email, password) => {
     };
   }
 };
+
+
+
+/**
+ * 질문 답변 제출 API 호출 함수
+ * param {object} answers 질문 답변 데이터
+ * returns {object} 성공 여부와 메시지
+ */
+export const submitQuestionAnswers = async (answers) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/questions/submit`, answers, {
+      headers: { "Content-Type": "application/json" },
+    });
+
+    return {
+      success: true,
+      data: response.data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: error.response?.data || "서버 오류",
+    };
+  }
+};
