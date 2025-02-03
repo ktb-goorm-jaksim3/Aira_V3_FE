@@ -4,46 +4,32 @@
       <img src="https://raw.githubusercontent.com/tkddk0108/image-for-Aira/main/Aira_logo.png" alt="Logo" class="logo" />
       <h2 class="title">요약</h2>
       <p class="notation">* 3차 프로젝트 도입 예정, 예시입니다</p>
-      <p class="description" v-html="summary"></p>
+      <p class="description">
+          아이디어 구상 시, 검증된 방법을 선호하며 <br>
+          즉흥적으로 실행에 옮기시는군요! <br>
+          혼자 사고하는 것을 더 선호하시지만, <br> 타인의 피드백도 수용하며 협력을 즐기시는 모습입니다.<br>
+          실패와 비판에도 침착하게 대처하시고 <br>긍정적으로 극복하는 태도를 지니셨습니다!
+      </p>
     </div>
     <button class="btn" @click="goToChat">채팅으로 이동</button>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   data() {
     return {
       summary: '요약을 생성 중입니다...',
     };
   },
-  created() {
-    this.fetchSummary();
-  },
   methods: {
-    async fetchSummary() {
-      try {
-        const response = await axios.post('/generate/', {
-          answers: [/* 사용자 답변 데이터 */],
-        });
-        this.summary = response.data.summary;
-      } //임시방편 '요약을 가져오는데 실패했습니다.'자리임
-       catch (error) {
-        this.summary = 
-          "아이디어 구상 시, 검증된 방법을 선호하며 <br>"+
-          "즉흥적으로 실행에 옮기시는군요! <br>" +
-          "혼자 사고하는 것을 더 선호하시지만, <br> 타인의 피드백도 수용하며 협력을 즐기시는 모습입니다.<br> " +
-          "실패와 비판에도 침착하게 대처하시고 <br>긍정적으로 극복하는 태도를 지니셨습니다!";
-      }
-    },
     goToChat() {
       this.$router.push('/chat');
     },
   },
 };
 </script>
+
 
 <style scoped>
 /* 메인 컨테이너 스타일 */
