@@ -1,4 +1,3 @@
-<!-- LoginForm.vue -->
 <template>
   <div class="button-signup">
     <button @click="goToSignup">회원가입</button>
@@ -13,32 +12,21 @@
       <!-- 이메일 입력 필드 -->
       <div class="form-group">
         <label for="email">이메일</label>
-        <input
-          type="email"
-          v-model="email"
-          id="email"
-          placeholder=""
-        />
-        <div v-if="!isEmailValid" class="error">
-          * 유효한 이메일 주소를 입력하세요.
-        </div>
+        <input type="email" v-model="email" id="email" placeholder="" />
       </div>
 
       <!-- 비밀번호 입력 필드 -->
       <div class="form-group">
         <label for="password">비밀번호</label>
-        <input
-          type="password"
-          v-model="password"
-          id="password"
-          placeholder=""
-        />
+        <input type="password" v-model="password" id="password" placeholder="" />
       </div>
 
-      <!-- 로그인 버튼 -->
-      <button class="login-btn" :disabled="!isFormValid" @click="handleLogin">
-        로그인
-      </button>
+      <!-- 로그인 버튼을 form-group 내부에 배치 -->
+      <div class="form-group">
+        <button class="login-btn" :disabled="!isFormValid" @click="handleLogin">
+          로그인
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -132,12 +120,13 @@ h1 {
   font-size: 1.7rem; /* 글자 크기 */
   font-weight: normal; /* 기본 글자 두께 */
 }
-
 /* 입력 그룹 스타일 */
 .form-group {
-  position: relative; /* 오류 메시지를 그룹 내에서 고정 */
-  margin-bottom: 15px; /* 입력 그룹 아래 여백 추가 */
-  min-height: 6rem; /* 레이아웃 고정을 위한 최소 높이 (길이 늘림) */
+  position: relative;
+  margin-bottom: 15px;
+  min-height: 4.5rem;
+  max-width: 350px; /* 입력 필드와 동일한 최대 너비 */
+  width: 100%;
 }
 
 /* 입력 필드 라벨 스타일 */
@@ -150,13 +139,14 @@ label {
 
 /* 입력 필드 스타일 */
 input {
-  width: 100%; /* 입력 필드 너비를 컨테이너에 맞춤 */
-  padding: 12px; /* 내부 여백 (길이 늘림) */
-  border: 1px solid #e8e8e8; /* 테두리 색상 */
-  border-radius: 0px; /* 모서리를 직각으로 설정 */
-  font-size: 0.8em; /* 글자 크기 (크기 늘림) */
-  outline: none; /* 포커스 시 기본 외곽선 제거 */
-  transition: border-color 0.3s; /* 테두리 색상 전환 효과 */
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e8e8e8;
+  border-radius: 0px;
+  font-size: 0.8rem;
+  outline: none;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
 }
 
 input:focus {
