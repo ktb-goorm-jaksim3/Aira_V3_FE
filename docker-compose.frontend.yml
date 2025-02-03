@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      VUE_APP_API_BASE_URL: http://localhost:8000
+#    depends_on:
+#      - backend
+    networks:
+      - Aira_shared_local_network
+
+# Optionally define a network here if you want the frontend to link to the backend container by name:
+networks:
+  Aira_shared_local_network:
+    external: true
