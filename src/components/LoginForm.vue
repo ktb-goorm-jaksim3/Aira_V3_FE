@@ -71,7 +71,7 @@ export default {
           localStorage.setItem('token', result.data.access_token); // 토큰 저장 
           // 현재 이 방식은 웹 브라우저에
           // 영구적으로 데이터를 저장하는 방식으로 보안적인 취약점이 존재 변경 필요하지만 일단 개발 먼저 수행 예정.
-          // 이러한 이유로 session storage 고려해야함
+          // 이러한 이유로 session storage 고려해야함.
           alert("로그인 성공!");
           this.$router.push("/intro"); // 로그인 성공 시 Intro로 이동
         } else {

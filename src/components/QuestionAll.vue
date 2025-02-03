@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <button :disabled="Object.values(answers).includes('')" @click="submitAnswers">제출하기</button>
+    <button :disabled="Object.values(answers).includes('')" @click="handleSubmit">제출하기</button>
   </div>
 </template>
 
@@ -115,18 +115,22 @@ export default {
         console.log(`Question ${index + 1} completed`);
       }
     },
-    async submitAnswers() {
-      try {
-        const response = await submitQuestionAnswers(this.answers);
-        if (response.success) {
-          alert("답변이 제출되었습니다!");
-          this.$router.push("/summary");
-        } else {
-          alert(response.message);
-        }
-      } catch (error) {
-        console.error(error);
-        alert("제출 중 오류가 발생했습니다.");
+    async handleSubmit() {
+      const answers = {
+        answer1: this.answers.answer1,
+        answer2: this.answers.answer2,
+        answer3: this.answers.answer3,
+        answer4: this.answers.answer4,
+        answer5: this.answers.answer5,
+      };
+
+      const result = await submitQuestionAnswers(answers);
+      console.log(result.success)
+      if (result && result.success) { // API 응답 확인
+        // 요약 페이지로 라우팅
+        this.$router.push('/summary'); // 라우팅 경로를 '/summary'로 변경
+      } else {
+        alert(result.message || '제출 실패'); // 실패 메시지 표시
       }
     },
   },
@@ -219,8 +223,7 @@ export default {
   display: block;
   margin: 1rem auto; /* 이미지 위아래 여백 추가 */
   width: 250px;
-  margin-top: 0.7rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
 }
 .options {
   display: flex; /* Flexbox 활성화 */
