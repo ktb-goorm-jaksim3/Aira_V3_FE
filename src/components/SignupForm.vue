@@ -50,6 +50,7 @@
 
 <script>
 import { handleSignup } from "../api/api.js";
+import { showAlert } from "../utils.js";
 
 export default {
   data() {
@@ -83,24 +84,51 @@ export default {
         const result = await handleSignup(this.nickname, this.email, this.password);
 
         if (result.success) {
-          alert("회원가입 성공!");
+          showAlert("성공", "회원가입에 성공했습니다!", "success");
+
           // 입력 필드 초기화
           this.nickname = "";
           this.email = "";
           this.password = "";
           this.confirmPassword = "";
 
-          // 회원가입 성공 시 로그인으로 이동
-          this.$router.push('/login');
+          // 회원가입 성공 시 로그인 페이지로 이동
+          this.$router.push("/login");
         } else {
-          alert("회원가입 실패: " + result.message);
+          console.log("회원가입 실패 메시지:", result.message); // 디버깅 로그
+
+          if (result.message.includes("Username already registered")) {
+            showAlert(
+              "회원가입 실패",
+              "이미 존재하는 아이디입니다.",
+              "error"
+            );
+          } else if (result.message.includes("Email already registered")) {
+            showAlert(
+              "회원가입 실패",
+              "이미 존재하는 이메일입니다.",
+              "error"
+            );
+          } else {
+            showAlert(
+              "회원가입 실패",
+              `오류: ${result.message}`,
+              "error"
+            );
+          }
         }
       } catch (error) {
-        alert("회원가입 중 오류가 발생했습니다.");
+        console.error("회원가입 중 오류 발생:", error);
+
+        showAlert(
+          "회원가입 실패",
+          "회원가입 중 오류가 발생했습니다.",
+          "error"
+        );
       }
     },
     goToLogin() {
-      this.$router.push('/login'); // 로그인 페이지로 이동
+      this.$router.push("/login"); // 로그인 페이지로 이동
     },
   },
 };

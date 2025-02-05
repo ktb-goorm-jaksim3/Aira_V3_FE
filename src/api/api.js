@@ -58,18 +58,22 @@ export const handleSignup = async (nickname, email, password) => {
       password: password,
     });
 
-    // 성공 시 데이터 반환
     return {
       success: true,
       data: response.data,
     };
   } catch (error) {
-    // 실패 시 에러 메시지 반환
+    console.error("회원가입 오류:", error.response ? error.response.data : error);
+
+    // 서버 응답에서 오류 메시지 추출
+    const errorMessage =
+      error.response && error.response.data && error.response.data.detail
+        ? error.response.data.detail
+        : "회원가입 중 알 수 없는 오류가 발생했습니다.";
+
     return {
       success: false,
-      message: error.response && error.response.data
-        ? error.response.data
-        : "서버 오류",
+      message: errorMessage, // 에러 메시지 반환
     };
   }
 };
