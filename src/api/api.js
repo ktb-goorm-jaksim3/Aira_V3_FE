@@ -84,25 +84,31 @@ export const handleSignup = async (nickname, email, password) => {
  * returns {object} 성공 여부와 메시지
  */
 export const submitQuestionAnswers = async (answers) => {
-  const token = localStorage.getItem('token'); // 저장된 토큰 가져오기
+  const token = localStorage.getItem("token"); // 저장된 토큰 가져오기
   try {
     const response = await axios.post(`${API_BASE_URL}/questions/submit`, answers, {
-      headers: { 
+      headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}` // 인증 헤더에 토큰 추가
+        Authorization: `Bearer ${token}`, // 인증 헤더 추가
       },
     });
-    
-    // 응답에서 success 값을 명시적으로 설정
+
     return {
-      success: true, // 성공적으로 요청이 처리된 경우
-      data: response.data, // 응답 데이터
+      success: true,
+      data: response.data,
     };
   } catch (error) {
     console.error("Error submitting answers:", error);
+
+    // 서버 응답에서 오류 메시지 추출
+    const errorMessage =
+      error.response && error.response.data && error.response.data.detail
+        ? error.response.data.detail
+        : "답변 제출에 실패했습니다.";
+
     return {
-      success: false, // 요청이 실패한 경우
-      message: error.response?.data?.message || "서버 오류", // 오류 메시지
+      success: false,
+      message: errorMessage, // 오류 메시지 반환
     };
   }
 };
