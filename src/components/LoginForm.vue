@@ -63,7 +63,7 @@ export default {
         } else {
           console.log("로그인 실패 메시지:", result.message); // 디버깅 로그
 
-          if (result.message.includes("Incorrect email or password")) {
+          if (result.message.includes("Invalid credentials")) {
             showAlert(
               "로그인 실패",
               "이메일 또는 패스워드가 일치하지 않습니다.",
