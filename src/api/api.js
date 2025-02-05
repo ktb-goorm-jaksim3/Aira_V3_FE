@@ -11,14 +11,15 @@ export const handleLogin = async (email, password) => {
   try {
     console.log("Sending login request with:", { email, password });
 
-    const response = await axios.post(`${API_BASE_URL}/auth/login`, {
-      email: email,
-      password: password,
-    },{
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await axios.post(
+      `${API_BASE_URL}/auth/login`,
+      { email: email, password: password },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     console.log("Login response:", response.data);
 
@@ -28,12 +29,17 @@ export const handleLogin = async (email, password) => {
     };
   } catch (error) {
     console.error("Login error:", error.response ? error.response.data : error);
+
+    // 서버에서 반환된 오류 메시지 추출
+    const errorMessage =
+      error.response && error.response.data && error.response.data.detail
+        ? error.response.data.detail
+        : "로그인 중 알 수 없는 오류가 발생했습니다.";
+
     return {
       success: false,
-      message: error.response && error.response.data
-        ? error.response.data
-        : "서버 오류",
-    }; 
+      message: errorMessage, // 에러 메시지 반환
+    };
   }
 };
 
