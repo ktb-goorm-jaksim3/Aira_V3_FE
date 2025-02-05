@@ -55,7 +55,7 @@ export default {
         {
           title: "Q1. 개방성",
           body: "새로운 아이디어를 생각할 때<br>당신은 얼마나 독창적인<br>접근 방식을 선호하시나요?",
-          image: "https://raw.githubusercontent.com/tkddk0108/image-for-Aira/main/Question1.png",
+          image: "https://d3gsacqd9y4oge.cloudfront.net/Question1.png",
           options: [
             { label: "검증된 방법이<br />효과적인 것 같아요." },
             { label: "창의적인 방법<br />찾는 걸 좋아해요." },
@@ -64,7 +64,7 @@ export default {
         {
           title: "Q2. 성실성",
           body: "아이디어를 발전시키기 위해<br>얼마나 체계적으로 계획을<br>세우고 실행하나요?",
-          image: "https://raw.githubusercontent.com/tkddk0108/image-for-Aira/main/Question2.png",
+          image: "https://d3gsacqd9y4oge.cloudfront.net/Question2.png",
           options: [
             { value: "1", label: "떠오르는 생각을<br />바로 실행에 옮겨요." },
             { value: "2", label: "아이디어 구체화<br />계획부터 세워요." },
@@ -73,7 +73,7 @@ export default {
         {
           title: "Q3. 외향성",
           body: "아이디어를 발전시키기 위해<br>다른 사람들과의 협업이나 <br>브레인스토밍을 선호하시나요?",
-          image: "https://raw.githubusercontent.com/tkddk0108/image-for-Aira/main/Question3.png",
+          image: "https://d3gsacqd9y4oge.cloudfront.net/Question3.png",
           options: [
             { value: "1", label: "혼자 생각할 때 아이디어<br />발전에 더 효과적이에요." },
             { value: "2", label: "사람들과 나누고 협업하면<br />좋은 생각이 떠올라요." },
@@ -82,7 +82,7 @@ export default {
         {
           title: "Q4. 친화성",
           body: "아이디어를 구상할 때<br>다른 사람들의 피드백을<br>얼마나 중요하게 생각하시나요?",
-          image: "https://raw.githubusercontent.com/tkddk0108/image-for-Aira/main/Question4.png",
+          image: "https://d3gsacqd9y4oge.cloudfront.net/Question4.png",
           options: [
             { value: "1", label: "타인의 피드백을 수용하고<br />협력하는 과정을 즐겨요." },
             { value: "2", label: "타인의 의견보다 제 생각을<br />스스로 판단하는 편이예요." },
@@ -91,7 +91,7 @@ export default {
         {
           title: "Q5. 정서적 안정성",
           body: "비판이나 실패가<br>아이디어 구상에<br>얼마나 영향을 미치나요?",
-          image: "https://raw.githubusercontent.com/tkddk0108/image-for-Aira/main/Question5.png",
+          image: "https://d3gsacqd9y4oge.cloudfront.net/Question5.png",
           options: [
             { value: "1", label: "침착하게 대처하고,<br />새로운 방법을 찾아 나가요." },
             { value: "2", label: "작은 문제나 비판에 스트레스를<br />받고 힘들어지곤해요." },
@@ -229,6 +229,7 @@ export default {
   display: flex; /* Flexbox 활성화 */
   flex-direction: row; /* 세로 정렬 */
   align-items: center; /* 가운데 정렬 */
+  margin-top: 1.7rem;
   margin-bottom: 0rem; /* 라디오 버튼 선택지와 제출 버튼 간의 거리 조정 */
   gap: 1rem; /* 라디오 버튼들 사이에 간격 추가 */
   color: black;

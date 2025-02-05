@@ -5,7 +5,7 @@
   <div class="login-page">
     <div class="login-container">
       <!-- 로고 이미지 -->
-      <img src="https://raw.githubusercontent.com/tkddk0108/image-for-Aira/main/Aira_logo.png" alt="Aira 로고" class="logo">
+      <img src="https://d3gsacqd9y4oge.cloudfront.net/Aira_logo.png" alt="Aira 로고" class="logo">
   
       <h1>로그인</h1>
 
