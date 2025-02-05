@@ -43,6 +43,7 @@
 
 <script>
 import { submitQuestionAnswers } from "../api/api.js"; // 추가된 API 호출
+import { showAlert } from "../utils.js";
 
 export default {
   data() {
@@ -115,6 +116,7 @@ export default {
         console.log(`Question ${index + 1} completed`);
       }
     },
+
     async handleSubmit() {
       const answers = {
         answer1: this.answers.answer1,
@@ -124,13 +126,31 @@ export default {
         answer5: this.answers.answer5,
       };
 
-      const result = await submitQuestionAnswers(answers);
-      console.log(result.success)
-      if (result && result.success) { // API 응답 확인
-        // 요약 페이지로 라우팅
-        this.$router.push('/summary'); // 라우팅 경로를 '/summary'로 변경
-      } else {
-        alert(result.message || '제출 실패'); // 실패 메시지 표시
+      try {
+        const result = await submitQuestionAnswers(answers);
+
+        if (result?.success) {
+          showAlert("성공", "답변이 성공적으로 제출되었습니다.", "success");
+
+          // 제출 후 요약 페이지로 이동
+          this.$router.push("/summary");
+        } else {
+          console.error("제출 실패 메시지:", result?.message || "알 수 없는 오류");
+          showAlert(
+            "제출 실패",
+            result?.message ? `오류: ${result.message}` : "답변 제출에 실패했습니다.",
+            "error"
+          );
+        }
+      } catch (error) {
+        console.error("답변 제출 중 오류 발생:", error);
+
+        const errorMessage =
+          error.response && error.response.data && error.response.data.detail
+            ? error.response.data.detail
+            : "답변 제출에 실패했습니다.";
+
+        showAlert("오류", errorMessage, "error");
       }
     },
   },

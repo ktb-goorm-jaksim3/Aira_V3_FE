@@ -33,6 +33,7 @@
 
 <script>
 import { handleLogin } from "../api/api.js";
+import { showAlert } from "../utils.js";
 
 export default {
   data() {
@@ -56,21 +57,38 @@ export default {
         const result = await handleLogin(this.email, this.password);
 
         if (result.success) {
-          localStorage.setItem('token', result.data.access_token); // 토큰 저장 
-          // 현재 이 방식은 웹 브라우저에
-          // 영구적으로 데이터를 저장하는 방식으로 보안적인 취약점이 존재 변경 필요하지만 일단 개발 먼저 수행 예정.
-          // 이러한 이유로 session storage 고려해야함.
-          alert("로그인 성공!");
-          this.$router.push("/intro"); // 로그인 성공 시 Intro로 이동
+          localStorage.setItem("token", result.data.access_token); // 토큰 저장
+          showAlert("성공", "로그인 성공!", "success"); // 로그인 성공 알림
+          this.$router.push("/intro"); // 로그인 성공 시 Intro 페이지로 이동
         } else {
-          alert("로그인 실패: " + result.message);
+          console.log("로그인 실패 메시지:", result.message); // 디버깅 로그
+
+          if (result.message.includes("Invalid credentials")) {
+            showAlert(
+              "로그인 실패",
+              "이메일 또는 패스워드가 일치하지 않습니다.",
+              "error"
+            );
+          } else {
+            showAlert(
+              "로그인 실패",
+              `오류: ${result.message}`,
+              "error"
+            );
+          }
         }
       } catch (error) {
-        alert("로그인 처리 중 오류가 발생했습니다.");
+        console.error("Unexpected error during login:", error);
+
+        showAlert(
+          "오류",
+          "로그인 중 알 수 없는 오류가 발생했습니다.",
+          "error"
+        );
       }
     },
     goToSignup() {
-      this.$router.push('/signup'); // 로그인 페이지로 이동
+      this.$router.push("/signup"); // 회원가입 페이지로 이동
     },
   },
 };
