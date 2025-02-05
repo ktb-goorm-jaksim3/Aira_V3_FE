@@ -5,7 +5,7 @@
     <!-- 메인 이미지 -->
     <main>
       <div class="center-image">
-        <img src="https://tkddk0108.github.io/image-for-Aira/Aira.png" alt="Mars Central Image">
+        <img src="https://d3gsacqd9y4oge.cloudfront.net/Aira_chat.png" alt="Mars Central Image">
       </div>
     </main>
 
