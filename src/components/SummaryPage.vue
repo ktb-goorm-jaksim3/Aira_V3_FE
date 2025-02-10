@@ -1,7 +1,7 @@
 <template>
   <div class="intro">
     <div class="text-container">
-      <img src="https://raw.githubusercontent.com/tkddk0108/image-for-Aira/main/Aira_logo.png" alt="Logo" class="logo" />
+      <img src="https://d3gsacqd9y4oge.cloudfront.net/Aira_logo.png" alt="Logo" class="logo" />
       <h2 class="title">요약</h2>
       <p class="notation">* 3차 프로젝트 도입 예정, 예시입니다</p>
       <p class="description">

@@ -3,7 +3,7 @@
     <!-- 로고와 설명 텍스트를 포함하는 컨테이너 -->
     <div class="text-container">
       <!-- 로고 이미지 -->
-      <img src="https://raw.githubusercontent.com/tkddk0108/image-for-Aira/main/Aira_logo.png" alt="Aira 로고" class="logo">
+      <img src="https://d3gsacqd9y4oge.cloudfront.net/Aira_logo.png" alt="Aira 로고" class="logo">
       
       <!-- 설명 텍스트 -->
       <p class="description">지금부터<br>당신만의 Aira 조각을<br>도와드리겠습니다.</p>
