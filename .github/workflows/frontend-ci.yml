@@ -40,7 +40,7 @@ jobs:
         npm run build
 
     - name: Upload frontend artifact  # 빌드된 파일 저장
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: frontend-build
         path: dist/
