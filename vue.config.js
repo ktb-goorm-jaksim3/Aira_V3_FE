@@ -15,7 +15,6 @@ module.exports = defineConfig({
       }
     }
   },
-  /*
   // 로컬 환경에서 적용
   devServer: {
       proxy: {
@@ -26,9 +25,9 @@ module.exports = defineConfig({
         },
       },
     },
-  */
 
-  // 배포 환경에서 적용
+  // 배포 환경에서 적용하나 이제는 안 씀. Nginx를 쓰기 때문에 devServer는 무시함
+  /*
   devServer: {
     host: '0.0.0.0', // Listen on all interfaces
     allowedHosts: 'all', // Accept requests from any host
@@ -59,4 +58,5 @@ module.exports = defineConfig({
       }
     }
   }
+  */
 })
