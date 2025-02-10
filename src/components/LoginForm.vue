@@ -1,97 +1,99 @@
 <template>
-  <div class="button-signup">
-    <button @click="goToSignup">회원가입</button>
-  </div>
-  <div class="login-page">
-    <div class="login-container">
-      <!-- 로고 이미지 -->
-      <img src="https://d3gsacqd9y4oge.cloudfront.net/Aira_logo.png" alt="Aira 로고" class="logo">
-  
-      <h1>로그인</h1>
+  <div class="login-wrapper"> <!-- 최상위 요소로 래핑 -->
+    <div class="button-signup">
+      <button @click="goToSignup">회원가입</button>
+    </div>
+    <div class="login-page">
+      <div class="login-container">
+        <!-- 로고 이미지 -->
+        <img src="https://d3gsacqd9y4oge.cloudfront.net/Aira_logo.png" alt="Aira 로고" class="logo">
 
-      <!-- 이메일 입력 필드 -->
-      <div class="form-group">
-        <label for="email">이메일</label>
-        <input type="email" v-model="email" id="email" placeholder="" />
-      </div>
+        <h1>로그인</h1>
 
-      <!-- 비밀번호 입력 필드 -->
-      <div class="form-group">
-        <label for="password">비밀번호</label>
-        <input type="password" v-model="password" id="password" placeholder="" />
-      </div>
+        <!-- 이메일 입력 필드 -->
+        <div class="form-group">
+          <label for="email">이메일</label>
+          <input type="email" v-model="email" id="email" placeholder="" />
+        </div>
 
-      <!-- 로그인 버튼을 form-group 내부에 배치 -->
-      <div class="form-group">
-        <button class="login-btn" :disabled="!isFormValid" @click="handleLogin">
-          로그인
-        </button>
+        <!-- 비밀번호 입력 필드 -->
+        <div class="form-group">
+          <label for="password">비밀번호</label>
+          <input type="password" v-model="password" id="password" placeholder="" />
+        </div>
+
+        <!-- 로그인 버튼 -->
+        <div class="form-group">
+          <button class="login-btn" :disabled="!isFormValid" @click="handleLogin">
+            로그인
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { handleLogin } from "../api/api.js";
-import { showAlert } from "../utils.js";
+import { handleLogin } from '../api/api.js'
+import { showAlert } from '../utils.js'
 
 export default {
-  data() {
+  data () {
     return {
-      email: "",
-      password: "",
-    };
+      email: '',
+      password: ''
+    }
   },
   computed: {
-    isEmailValid() {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(this.email);
+    isEmailValid () {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      return emailRegex.test(this.email)
     },
-    isFormValid() {
-      return this.isEmailValid && this.password.length > 0;
-    },
+    isFormValid () {
+      return this.isEmailValid && this.password.length > 0
+    }
   },
   methods: {
-    async handleLogin() {
+    async handleLogin () {
       try {
-        const result = await handleLogin(this.email, this.password);
+        const result = await handleLogin(this.email, this.password)
 
         if (result.success) {
-          localStorage.setItem("token", result.data.access_token); // 토큰 저장
-          showAlert("성공", "로그인 성공!", "success"); // 로그인 성공 알림
-          this.$router.push("/intro"); // 로그인 성공 시 Intro 페이지로 이동
+          localStorage.setItem('token', result.data.access_token) // 토큰 저장
+          showAlert('성공', '로그인 성공!', 'success') // 로그인 성공 알림
+          this.$router.push('/intro') // 로그인 성공 시 Intro 페이지로 이동
         } else {
-          console.log("로그인 실패 메시지:", result.message); // 디버깅 로그
+          console.log('로그인 실패 메시지:', result.message) // 디버깅 로그
 
-          if (result.message.includes("Invalid credentials")) {
+          if (result.message.includes('Invalid credentials')) {
             showAlert(
-              "로그인 실패",
-              "이메일 또는 패스워드가 일치하지 않습니다.",
-              "error"
-            );
+              '로그인 실패',
+              '이메일 또는 패스워드가 일치하지 않습니다.',
+              'error'
+            )
           } else {
             showAlert(
-              "로그인 실패",
+              '로그인 실패',
               `오류: ${result.message}`,
-              "error"
-            );
+              'error'
+            )
           }
         }
       } catch (error) {
-        console.error("Unexpected error during login:", error);
+        console.error('Unexpected error during login:', error)
 
         showAlert(
-          "오류",
-          "로그인 중 알 수 없는 오류가 발생했습니다.",
-          "error"
-        );
+          '오류',
+          '로그인 중 알 수 없는 오류가 발생했습니다.',
+          'error'
+        )
       }
     },
-    goToSignup() {
-      this.$router.push("/signup"); // 회원가입 페이지로 이동
-    },
-  },
-};
+    goToSignup () {
+      this.$router.push('/signup') // 회원가입 페이지로 이동
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -109,7 +111,6 @@ export default {
   padding: 10px 20px; /* 버튼 내부 좌우 여백 설정 */
   z-index: 1000; /* 다른 요소 위에 위치 */
 }
-
 
 .login-page {
   background-color: #e8e8e8;
@@ -196,7 +197,7 @@ button {
     /* 이미지 비율 유지 */
     height: auto;
     /* 로고를 컨테이너 기준으로 오른쪽으로 이동 */
-    margin: 0; 
+    margin: 0;
 }
 
 /* 오류 메시지 스타일 */

@@ -25,41 +25,41 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { sendMessageToBot } from "../api/api.js"; // API 호출 함수
+import { ref } from 'vue'
+import { sendMessageToBot } from '../api/api.js' // API 호출 함수
 
 export default {
-  setup() {
-    const userInput = ref(""); // 사용자 입력 저장
-    const messages = ref([]); // 채팅 메시지 목록
-    const isDisabled = ref(false); // 버튼 비활성화 상태
+  setup () {
+    const userInput = ref('') // 사용자 입력 저장
+    const messages = ref([]) // 채팅 메시지 목록
+    const isDisabled = ref(false) // 버튼 비활성화 상태
 
     const sendMessage = async () => {
-      if (userInput.value.trim() === "") return;
+      if (userInput.value.trim() === '') return
 
-      isDisabled.value = true;
+      isDisabled.value = true
 
       // 사용자 메시지 추가
-      messages.value.push({ text: userInput.value, sender: "user" });
+      messages.value.push({ text: userInput.value, sender: 'user' })
 
       try {
-        const response = await sendMessageToBot(userInput.value);
+        const response = await sendMessageToBot(userInput.value)
         if (response.success) {
-          messages.value.push({ text: response.response, sender: "gpt" });
+          messages.value.push({ text: response.response, sender: 'gpt' })
         } else {
-          messages.value.push({ text: "Error: 백엔드 통신 실패", sender: "gpt" });
+          messages.value.push({ text: 'Error: 백엔드 통신 실패', sender: 'gpt' })
         }
       } catch (error) {
-        messages.value.push({ text: "Error: 백엔드 통신 실패", sender: "gpt" });
+        messages.value.push({ text: 'Error: 백엔드 통신 실패', sender: 'gpt' })
       }
 
-      isDisabled.value = false;
-      userInput.value = "";
-    };
+      isDisabled.value = false
+      userInput.value = ''
+    }
 
-    return { userInput, messages, sendMessage, isDisabled };
-  },
-};
+    return { userInput, messages, sendMessage, isDisabled }
+  }
+}
 </script>
 
 <style scoped>
@@ -146,7 +146,6 @@ h1 {
     align-self: flex-end;
     text-align: right;
 }
-
 
 /* AI 메시지 스타일 (왼쪽 정렬, 회색 말풍선) */
 .chat-message.gpt {

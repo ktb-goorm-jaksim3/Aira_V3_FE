@@ -17,19 +17,18 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      summary: '요약을 생성 중입니다...',
-    };
+      summary: '요약을 생성 중입니다...'
+    }
   },
   methods: {
-    goToChat() {
-      this.$router.push('/chat');
-    },
-  },
-};
+    goToChat () {
+      this.$router.push('/chat')
+    }
+  }
+}
 </script>
-
 
 <style scoped>
 /* 메인 컨테이너 스타일 */
