@@ -5,6 +5,9 @@ const path = require('path')
 // 환경 변수에서 API URl 가져오기
 const API_BASE_URL = process.env.VUE_APP_API_BASE_URL
 const WS_HOSTNAME = API_BASE_URL ? new URL(API_BASE_URL).hostname : 'default-hostname';
+//주석 코드에서 사용하지만 깃에 업로드 되는 코드에서는 사용되지 않음
+// 사용되지 않는 변수는 ESLint 가 오류로 확인하여 로그를 출력하는 것으로 에러 막음
+console.log(`WebSocket Hostname is: ${WS_HOSTNAME}`);
 
 module.exports = defineConfig({
   transpileDependencies: true,

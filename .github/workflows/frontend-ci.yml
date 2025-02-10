@@ -7,8 +7,7 @@ on:
     branches: [ "main" ] # main 브랜치로 PR이 올라오면 실행
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   frontend-ci:
