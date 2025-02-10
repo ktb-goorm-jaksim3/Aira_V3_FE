@@ -2,6 +2,10 @@
 const { defineConfig } = require('@vue/cli-service')
 const path = require('path')
 
+// 환경 변수에서 API URl 가져오기
+const API_BASE_URL = process.env.VUE_APP_API_BASE_URL
+const WS_HOSTNAME = API_BASE_URL ? new URL(API_BASE_URL).hostname : 'default-hostname';
+
 module.exports = defineConfig({
   transpileDependencies: true,
   configureWebpack: {
@@ -26,7 +30,7 @@ module.exports = defineConfig({
 
   // 배포 환경에서 적용
   devServer: {
-    host: '0.0.0.0', // Li용ten on all interfaces
+    host: '0.0.0.0', // Listen on all interfaces
     allowedHosts: 'all', // Accept requests from any host
     headers: {
       'Access-Control-Allow-Origin': '*'
@@ -49,7 +53,7 @@ module.exports = defineConfig({
     },
     client: {
       webSocketURL: {
-        hostname: 'be-alb-119548847.ap-northeast-2.elb.amazonaws.com',
+        hostname: WS_HOSTNAME, // Now uses the parsed hostname from API_BASE_URL
         port: 80,
         protocol: 'ws' // Use "wss" if your ALB uses HTTPS
       }
