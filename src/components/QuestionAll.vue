@@ -42,121 +42,120 @@
 </template>
 
 <script>
-import { submitQuestionAnswers } from "../api/api.js"; // 추가된 API 호출
-import { showAlert } from "../utils.js";
+import { submitQuestionAnswers } from '../api/api.js' // 추가된 API 호출
+import { showAlert } from '../utils.js'
 
 export default {
-  data() {
+  data () {
     return {
       activeTab: 0, // 활성화된 탭
-      tabs: ["Q1", "Q2", "Q3", "Q4", "Q5"], // 탭 이름
-      answers: { answer1: "", answer2: "", answer3: "", answer4: "", answer5: "" }, // 각 질문의 답변 저장
+      tabs: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], // 탭 이름
+      answers: { answer1: '', answer2: '', answer3: '', answer4: '', answer5: '' }, // 각 질문의 답변 저장
       questions: [
         // 질문 데이터
         {
-          title: "Q1. 개방성",
-          body: "새로운 아이디어를 생각할 때<br>당신은 얼마나 독창적인<br>접근 방식을 선호하시나요?",
-          image: "https://d3gsacqd9y4oge.cloudfront.net/Question1.png",
+          title: 'Q1. 개방성',
+          body: '새로운 아이디어를 생각할 때<br>당신은 얼마나 독창적인<br>접근 방식을 선호하시나요?',
+          image: 'https://d3gsacqd9y4oge.cloudfront.net/Question1.png',
           options: [
-            { label: "검증된 방법이<br />효과적인 것 같아요." },
-            { label: "창의적인 방법<br />찾는 걸 좋아해요." },
-          ],
+            { label: '검증된 방법이<br />효과적인 것 같아요.' },
+            { label: '창의적인 방법<br />찾는 걸 좋아해요.' }
+          ]
         },
         {
-          title: "Q2. 성실성",
-          body: "아이디어를 발전시키기 위해<br>얼마나 체계적으로 계획을<br>세우고 실행하나요?",
-          image: "https://d3gsacqd9y4oge.cloudfront.net/Question2.png",
+          title: 'Q2. 성실성',
+          body: '아이디어를 발전시키기 위해<br>얼마나 체계적으로 계획을<br>세우고 실행하나요?',
+          image: 'https://d3gsacqd9y4oge.cloudfront.net/Question2.png',
           options: [
-            { value: "1", label: "떠오르는 생각을<br />바로 실행에 옮겨요." },
-            { value: "2", label: "아이디어 구체화<br />계획부터 세워요." },
-          ],
+            { value: '1', label: '떠오르는 생각을<br />바로 실행에 옮겨요.' },
+            { value: '2', label: '아이디어 구체화<br />계획부터 세워요.' }
+          ]
         },
         {
-          title: "Q3. 외향성",
-          body: "아이디어를 발전시키기 위해<br>다른 사람들과의 협업이나 <br>브레인스토밍을 선호하시나요?",
-          image: "https://d3gsacqd9y4oge.cloudfront.net/Question3.png",
+          title: 'Q3. 외향성',
+          body: '아이디어를 발전시키기 위해<br>다른 사람들과의 협업이나 <br>브레인스토밍을 선호하시나요?',
+          image: 'https://d3gsacqd9y4oge.cloudfront.net/Question3.png',
           options: [
-            { value: "1", label: "혼자 생각할 때 아이디어<br />발전에 더 효과적이에요." },
-            { value: "2", label: "사람들과 나누고 협업하면<br />좋은 생각이 떠올라요." },
-          ],
+            { value: '1', label: '혼자 생각할 때 아이디어<br />발전에 더 효과적이에요.' },
+            { value: '2', label: '사람들과 나누고 협업하면<br />좋은 생각이 떠올라요.' }
+          ]
         },
         {
-          title: "Q4. 친화성",
-          body: "아이디어를 구상할 때<br>다른 사람들의 피드백을<br>얼마나 중요하게 생각하시나요?",
-          image: "https://d3gsacqd9y4oge.cloudfront.net/Question4.png",
+          title: 'Q4. 친화성',
+          body: '아이디어를 구상할 때<br>다른 사람들의 피드백을<br>얼마나 중요하게 생각하시나요?',
+          image: 'https://d3gsacqd9y4oge.cloudfront.net/Question4.png',
           options: [
-            { value: "1", label: "타인의 피드백을 수용하고<br />협력하는 과정을 즐겨요." },
-            { value: "2", label: "타인의 의견보다 제 생각을<br />스스로 판단하는 편이예요." },
-          ],
+            { value: '1', label: '타인의 피드백을 수용하고<br />협력하는 과정을 즐겨요.' },
+            { value: '2', label: '타인의 의견보다 제 생각을<br />스스로 판단하는 편이예요.' }
+          ]
         },
         {
-          title: "Q5. 정서적 안정성",
-          body: "비판이나 실패가<br>아이디어 구상에<br>얼마나 영향을 미치나요?",
-          image: "https://d3gsacqd9y4oge.cloudfront.net/Question5.png",
+          title: 'Q5. 정서적 안정성',
+          body: '비판이나 실패가<br>아이디어 구상에<br>얼마나 영향을 미치나요?',
+          image: 'https://d3gsacqd9y4oge.cloudfront.net/Question5.png',
           options: [
-            { value: "1", label: "침착하게 대처하고,<br />새로운 방법을 찾아 나가요." },
-            { value: "2", label: "작은 문제나 비판에 스트레스를<br />받고 힘들어지곤해요." },
-          ],
-        },
-      ],
-    };
+            { value: '1', label: '침착하게 대처하고,<br />새로운 방법을 찾아 나가요.' },
+            { value: '2', label: '작은 문제나 비판에 스트레스를<br />받고 힘들어지곤해요.' }
+          ]
+        }
+      ]
+    }
   },
   computed: {
-    filteredQuestions() {
+    filteredQuestions () {
       // activeTab에 맞는 질문 반환
       if (this.activeTab >= 0 && this.activeTab < this.questions.length) {
-        return [this.questions[this.activeTab]];
+        return [this.questions[this.activeTab]]
       }
-      return [];
-    },
+      return []
+    }
   },
   methods: {
-    markCompletion(index) {
+    markCompletion (index) {
       if (this.answers[`answer${index + 1}`]) {
-        console.log(`Question ${index + 1} completed`);
+        console.log(`Question ${index + 1} completed`)
       }
     },
 
-    async handleSubmit() {
+    async handleSubmit () {
       const answers = {
         answer1: this.answers.answer1,
         answer2: this.answers.answer2,
         answer3: this.answers.answer3,
         answer4: this.answers.answer4,
-        answer5: this.answers.answer5,
-      };
+        answer5: this.answers.answer5
+      }
 
       try {
-        const result = await submitQuestionAnswers(answers);
+        const result = await submitQuestionAnswers(answers)
 
         if (result?.success) {
-          showAlert("성공", "답변이 성공적으로 제출되었습니다.", "success");
+          showAlert('성공', '답변이 성공적으로 제출되었습니다.', 'success')
 
           // 제출 후 요약 페이지로 이동
-          this.$router.push("/summary");
+          this.$router.push('/summary')
         } else {
-          console.error("제출 실패 메시지:", result?.message || "알 수 없는 오류");
+          console.error('제출 실패 메시지:', result?.message || '알 수 없는 오류')
           showAlert(
-            "제출 실패",
-            result?.message ? `오류: ${result.message}` : "답변 제출에 실패했습니다.",
-            "error"
-          );
+            '제출 실패',
+            result?.message ? `오류: ${result.message}` : '답변 제출에 실패했습니다.',
+            'error'
+          )
         }
       } catch (error) {
-        console.error("답변 제출 중 오류 발생:", error);
+        console.error('답변 제출 중 오류 발생:', error)
 
         const errorMessage =
           error.response && error.response.data && error.response.data.detail
             ? error.response.data.detail
-            : "답변 제출에 실패했습니다.";
+            : '답변 제출에 실패했습니다.'
 
-        showAlert("오류", errorMessage, "error");
+        showAlert('오류', errorMessage, 'error')
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
-
 
 <style scope>
 /* 질문 전체 컨테이너 */

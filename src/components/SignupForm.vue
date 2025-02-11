@@ -1,137 +1,139 @@
 <template>
-  <div class="button-login">
-    <button @click="goToLogin">로그인</button>
-  </div>
-  <div class="signup-page">
-    <div class="signup-container">
-      <!-- 로고 이미지 -->
-      <img src="https://d3gsacqd9y4oge.cloudfront.net/Aira_logo.png" alt="Aira 로고" class="logo">
-      <h1>회원가입</h1>
+  <div class="signup-wrapper"> <!-- 최상위 요소 추가 -->
+    <div class="button-login">
+      <button @click="goToLogin">로그인</button>
+    </div>
+    <div class="signup-page">
+      <div class="signup-container">
+        <!-- 로고 이미지 -->
+        <img src="https://d3gsacqd9y4oge.cloudfront.net/Aira_logo.png" alt="Aira 로고" class="logo">
+        <h1>회원가입</h1>
 
-      <!-- 닉네임 입력 필드 -->
-      <div class="form-group">
-        <label for="nickname">닉네임</label>
-        <input type="text" v-model="nickname" id="nickname" placeholder="" />
-      </div>
-
-      <!-- 이메일 입력 필드 -->
-      <div class="form-group">
-        <label for="email">이메일</label>
-        <input type="email" v-model="email" id="email" placeholder="" />
-      </div>
-
-      <!-- 비밀번호 입력 필드 -->
-      <div class="form-group">
-        <label for="password">비밀번호</label>
-        <input type="password" v-model="password" id="password" placeholder="" />
-        <div class="error" :class="{ hidden: isPasswordValid }">
-          *8자리 이상, 영어, 숫자, 특수문자 포함
+        <!-- 닉네임 입력 필드 -->
+        <div class="form-group">
+          <label for="nickname">닉네임</label>
+          <input type="text" v-model="nickname" id="nickname" placeholder="" />
         </div>
-      </div>
 
-      <!-- 비밀번호 확인 필드 -->
-      <div class="form-group">
-        <label for="confirmPassword">비밀번호 확인</label>
-        <input type="password" v-model="confirmPassword" id="confirmPassword" placeholder="" />
-        <div v-if="isPasswordMismatch" class="error">
-          비밀번호가 일치하지 않습니다.
+        <!-- 이메일 입력 필드 -->
+        <div class="form-group">
+          <label for="email">이메일</label>
+          <input type="email" v-model="email" id="email" placeholder="" />
         </div>
-      </div>
 
-      <!-- 회원가입 버튼을 form-group 내부에 배치 -->
-      <div class="form-group">
-        <button class="signup-btn" :disabled="!isFormValid" @click="handleSignup">
-          회원가입
-        </button>
+        <!-- 비밀번호 입력 필드 -->
+        <div class="form-group">
+          <label for="password">비밀번호</label>
+          <input type="password" v-model="password" id="password" placeholder="" />
+          <div class="error" :class="{ hidden: isPasswordValid }">
+            *8자리 이상, 영어, 숫자, 특수문자 포함
+          </div>
+        </div>
+
+        <!-- 비밀번호 확인 필드 -->
+        <div class="form-group">
+          <label for="confirmPassword">비밀번호 확인</label>
+          <input type="password" v-model="confirmPassword" id="confirmPassword" placeholder="" />
+          <div v-if="isPasswordMismatch" class="error">
+            비밀번호가 일치하지 않습니다.
+          </div>
+        </div>
+
+        <!-- 회원가입 버튼 -->
+        <div class="form-group">
+          <button class="signup-btn" :disabled="!isFormValid" @click="handleSignup">
+            회원가입
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { handleSignup } from "../api/api.js";
-import { showAlert } from "../utils.js";
+import { handleSignup } from '../api/api.js'
+import { showAlert } from '../utils.js'
 
 export default {
-  data() {
+  data () {
     return {
-      nickname: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    };
+      nickname: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
   },
   computed: {
-    isPasswordValid() {
-      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-      return passwordRegex.test(this.password);
+    isPasswordValid () {
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+      return passwordRegex.test(this.password)
     },
-    isPasswordMismatch() {
-      return this.password !== this.confirmPassword && this.confirmPassword.length > 0;
+    isPasswordMismatch () {
+      return this.password !== this.confirmPassword && this.confirmPassword.length > 0
     },
-    isFormValid() {
+    isFormValid () {
       return (
         this.nickname &&
         this.email &&
         this.isPasswordValid &&
         !this.isPasswordMismatch
-      );
-    },
+      )
+    }
   },
   methods: {
-    async handleSignup() {
+    async handleSignup () {
       try {
-        const result = await handleSignup(this.nickname, this.email, this.password);
+        const result = await handleSignup(this.nickname, this.email, this.password)
 
         if (result.success) {
-          showAlert("성공", "회원가입에 성공했습니다!", "success");
+          showAlert('성공', '회원가입에 성공했습니다!', 'success')
 
           // 입력 필드 초기화
-          this.nickname = "";
-          this.email = "";
-          this.password = "";
-          this.confirmPassword = "";
+          this.nickname = ''
+          this.email = ''
+          this.password = ''
+          this.confirmPassword = ''
 
           // 회원가입 성공 시 로그인 페이지로 이동
-          this.$router.push("/login");
+          this.$router.push('/login')
         } else {
-          console.log("회원가입 실패 메시지:", result.message); // 디버깅 로그
+          console.log('회원가입 실패 메시지:', result.message) // 디버깅 로그
 
-          if (result.message.includes("Username already registered")) {
+          if (result.message.includes('Username already registered')) {
             showAlert(
-              "회원가입 실패",
-              "이미 존재하는 아이디입니다.",
-              "error"
-            );
-          } else if (result.message.includes("Email already registered")) {
+              '회원가입 실패',
+              '이미 존재하는 아이디입니다.',
+              'error'
+            )
+          } else if (result.message.includes('Email already registered')) {
             showAlert(
-              "회원가입 실패",
-              "이미 존재하는 이메일입니다.",
-              "error"
-            );
+              '회원가입 실패',
+              '이미 존재하는 이메일입니다.',
+              'error'
+            )
           } else {
             showAlert(
-              "회원가입 실패",
+              '회원가입 실패',
               `오류: ${result.message}`,
-              "error"
-            );
+              'error'
+            )
           }
         }
       } catch (error) {
-        console.error("회원가입 중 오류 발생:", error);
+        console.error('회원가입 중 오류 발생:', error)
 
         showAlert(
-          "회원가입 실패",
-          "회원가입 중 오류가 발생했습니다.",
-          "error"
-        );
+          '회원가입 실패',
+          '회원가입 중 오류가 발생했습니다.',
+          'error'
+        )
       }
     },
-    goToLogin() {
-      this.$router.push("/login"); // 로그인 페이지로 이동
-    },
-  },
-};
+    goToLogin () {
+      this.$router.push('/login') // 로그인 페이지로 이동
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -156,7 +158,7 @@ export default {
     /* 이미지 비율 유지 */
     height: auto;
     /* 로고를 컨테이너 기준으로 오른쪽으로 이동 */
-    margin: 0; 
+    margin: 0;
 }
 
 .signup-page {

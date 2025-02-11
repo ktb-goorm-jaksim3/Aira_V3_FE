@@ -4,7 +4,7 @@
     <div class="text-container">
       <!-- 로고 이미지 -->
       <img src="https://d3gsacqd9y4oge.cloudfront.net/Aira_logo.png" alt="Aira 로고" class="logo">
-      
+
       <!-- 설명 텍스트 -->
       <p class="description">지금부터<br>당신만의 Aira 조각을<br>도와드리겠습니다.</p>
     </div>
@@ -16,11 +16,11 @@
 <script>
 export default {
   methods: {
-    goToNext() {
-      this.$router.push('/question'); // Question1으로 이동
-    },
-  },
-};
+    goToNext () {
+      this.$router.push('/question') // Question1으로 이동
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -40,7 +40,7 @@ export default {
     background-color: #e8e8e8;
     /* 텍스트 기본 색상을 검정색으로 설정 */
     color: black;
-    
+
 }
 
 /* 로고와 텍스트를 감싸는 부모 컨테이너 */
@@ -59,7 +59,7 @@ export default {
     /* 이미지 비율 유지 */
     height: auto;
     /* 로고를 컨테이너 기준으로 오른쪽으로 이동 */
-    margin: 0; 
+    margin: 0;
 }
 
 /* 설명 텍스트 스타일 */
