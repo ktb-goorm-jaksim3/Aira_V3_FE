@@ -1,14 +1,14 @@
 # ---------------------------
 # Stage 1: Build the application
 # ---------------------------
-FROM node:14 as build
+FROM node:14 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
-    
+
 # Copy package.json and package-lock.json (or yarn.lock) first
 COPY package*.json ./
-    
+
 # Install dependencies
 RUN npm install
     
