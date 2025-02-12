@@ -61,8 +61,6 @@ jobs:
           --platform linux/amd64,linux/arm64 \
           -t 730335258114.dkr.ecr.ap-northeast-2.amazonaws.com/aira/fe:latest \
           --push .
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
         # Export 'latest' image reference
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:latest" >> $GITHUB_OUTPUT
