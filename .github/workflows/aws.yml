@@ -63,6 +63,8 @@ jobs:
           --push .
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+        echo "image=$IMAGE_URI" >> $GITHUB_OUTPUT
         
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
