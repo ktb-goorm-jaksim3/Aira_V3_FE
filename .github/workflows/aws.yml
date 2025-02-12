@@ -1,9 +1,21 @@
 name: Deploy to Amazon ECS
 
+# on:
+#   push:
+#     branches:
+#       - Issue/Feature/#30
+#   workflow_dispatch:
+
+
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
-      - Issue/Feature/#30
+      - main
+    paths-ignore:
+      - '**.md'  # 문서 파일 변경은 워크플로우 트리거 제외
+
   workflow_dispatch:
 
 env:
