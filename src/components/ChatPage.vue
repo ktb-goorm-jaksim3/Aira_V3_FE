@@ -43,7 +43,9 @@ export default {
       messages.value.push({ text: userInput.value, sender: 'user' })
 
       try {
+        console.log("Sending message:", userInput.value)
         const response = await sendMessageToBot(userInput.value)
+        console.log("Response received:", response)
         if (response.success) {
           messages.value.push({ text: response.response, sender: 'gpt' })
         } else {
