@@ -151,12 +151,10 @@ export const sendMessageToBot = async (message) => {
         }
       }
     )
-
+    console.log("Response from backend:", response.data)
+    const chatContent = response.data.response
     // 응답 데이터 구조 조정
-    return {
-      success: true,
-      response: response.data.response // 백엔드에서 반환한 "response" 필드 사용
-    }
+    return { success: true, response: chatContent } // 백엔드에서 반환한 "response" 필드 사용
   } catch (error) {
     console.error('API 호출 오류:', error.response?.data || error.message)
 
