@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect } from '@jest/globals'
 import dotenv from 'dotenv'
 // 유효하지 않은 API 호출 추가에 대한 test
 
