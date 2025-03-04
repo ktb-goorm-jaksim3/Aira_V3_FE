@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect } from '@jest/globals'
 
 // 컴파일 오류가 발생하는 코드 주입 테스트
 /* eslint-disable no-undef */ // 파일 전체에서 no-undef 규칙 비활성화

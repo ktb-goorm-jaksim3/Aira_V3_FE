@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect } from '@jest/globals'
 
 // 1. 잘못된 잘못된 의존성 버전 사용
 describe('Frontend Dependency Version Check', () => {
