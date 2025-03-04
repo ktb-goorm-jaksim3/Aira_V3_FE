@@ -2,7 +2,7 @@ name: Frontend CI (JavaScript/TypeScript)
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "dev_production" ]
   pull_request:
     branches: [ "main" ]
 
