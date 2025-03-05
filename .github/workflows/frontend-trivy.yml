@@ -24,7 +24,7 @@ jobs:
           docker build -t my-image:latest .
 
       - name: Scan Docker image with Trivy
-        uses: aquasecurity/trivy-action@v0.5.0
+        uses: aquasecurity/trivy-action@v0.57.1
         with:
           image-ref: my-image:latest
           format: table
