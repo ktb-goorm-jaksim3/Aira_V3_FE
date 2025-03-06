@@ -1,8 +1,9 @@
 name: Frontend CD Workflow
 
 on:
-  push:
+  #push:
     #branches: [ "main" ]
+  pull_request:
     branches: [ "dev_production" ]
 
 jobs:
@@ -63,26 +64,26 @@ jobs:
           if [ ! -f "$MANIFEST_FILE" ]; then
             echo "Creating dummy deployment manifest"
             cat <<EOF > $MANIFEST_FILE
-            apiVersion: apps/v1
-            kind: Deployment
-            metadata:
-              name: frontend
-              namespace: application
-            spec:
-              replicas: 1
-              selector:
-                matchLabels:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: frontend
+            namespace: application
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: frontend
+            template:
+              metadata:
+                labels:
                   app: frontend
-              template:
-                metadata:
-                  labels:
-                    app: frontend
-                spec:
-                  containers:
-                  - name: frontend
-                    image: 730335258114.dkr.ecr.ap-northeast-2.amazonaws.com/aira/frontend:${IMAGE_TAG}
-                    ports:
-                    - containerPort: 80
+              spec:
+                containers:
+                - name: frontend
+                  image: 730335258114.dkr.ecr.ap-northeast-2.amazonaws.com/aira/frontend:${IMAGE_TAG}
+                  ports:
+                  - containerPort: 80
             EOF
           else
             sed -i "s|image: .*\/aira/frontend:.*|image: 730335258114.dkr.ecr.ap-northeast-2.amazonaws.com/aira/frontend:${IMAGE_TAG}|g" $MANIFEST_FILE
