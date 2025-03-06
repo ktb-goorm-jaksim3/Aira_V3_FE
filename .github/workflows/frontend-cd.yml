@@ -53,6 +53,7 @@ jobs:
           repository: ktb-goorm-jaksim3/Aira_V3_GitOps
           token: ${{ secrets.GITOPS_TOKEN }}
           path: gitops
+          fetch-depth: 0
 
       - name: Update Frontend Deployment Manifest (Dummy)
         run: |
