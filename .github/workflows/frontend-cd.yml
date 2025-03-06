@@ -58,6 +58,7 @@ jobs:
         run: |
           IMAGE_TAG=${{ needs.build_and_push.outputs.image_tag }}
           echo "Updating GitOps manifest with image tag ${IMAGE_TAG}"
+          cd gitops
           MANIFEST_FILE="gitops/frontend-deployment.yaml"
           
           # dummy manifest 생성 (namespace: application, Deployment: frontend)
@@ -89,7 +90,6 @@ jobs:
             sed -i "s|image: .*\/aira/frontend:.*|image: 730335258114.dkr.ecr.ap-northeast-2.amazonaws.com/aira/frontend:${IMAGE_TAG}|g" $MANIFEST_FILE
           fi
 
-          cd gitops
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add $MANIFEST_FILE
@@ -97,5 +97,4 @@ jobs:
 
       - name: Push changes to GitOps Repository
         run: |
-          cd gitops
           git push origin HEAD:main
