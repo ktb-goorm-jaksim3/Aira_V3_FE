@@ -2,7 +2,8 @@ name: Frontend CD Workflow
 
 on:
   push:
-    branches: [ "main" ]
+    #branches: [ "main" ]
+    branches: [ "dev_production" ]
 
 jobs:
   build_and_push:
