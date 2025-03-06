@@ -59,7 +59,7 @@ jobs:
           IMAGE_TAG=${{ needs.build_and_push.outputs.image_tag }}
           echo "Updating GitOps manifest with image tag ${IMAGE_TAG}"
           cd gitops
-          MANIFEST_FILE="gitops/frontend-deployment.yaml"
+          MANIFEST_FILE="frontend-deployment.yaml"
           
           # dummy manifest 생성 (namespace: application, Deployment: frontend)
           if [ ! -f "$MANIFEST_FILE" ]; then
