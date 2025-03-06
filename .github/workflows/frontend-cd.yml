@@ -65,20 +65,20 @@ jobs:
             apiVersion: apps/v1
             kind: Deployment
             metadata:
-            name: frontend
-            namespace: application
+              name: frontend
+              namespace: application
             spec:
-            replicas: 1
-            selector:
+              replicas: 1
+              selector:
                 matchLabels:
-                app: frontend
-            template:
+                  app: frontend
+              template:
                 metadata:
-                labels:
+                  labels:
                     app: frontend
                 spec:
-                containers:
-                - name: frontend
+                  containers:
+                  - name: frontend
                     image: 730335258114.dkr.ecr.ap-northeast-2.amazonaws.com/aira/frontend:${IMAGE_TAG}
                     ports:
                     - containerPort: 80
